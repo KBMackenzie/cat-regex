@@ -1,5 +1,5 @@
 # cat-regex
-CatRegex is a tiny Regex-builder library written in pure Haskell. You can use it to build PCRE-compliant Regex strings in a simple, readable way with pure Haskell code.
+CatRegex is a tiny library of Regex builder combinators written in pure Haskell. You can use it to build PCRE-compliant Regex strings in a simple, readable way with pure Haskell code.
 
 It's heavily inspired by the [magic-regexp](https://regexp.dev/) library for Javascript/Typescript.
 
