@@ -65,4 +65,23 @@ hexColor = stringify $
 
 Defining helper functions to avoid repetition is very helpful, as shown above.
 
-The output regex string can get very messy when alternative branches (through the `.||+` operator) are used due to the excess of non-capturing groups used to ensure correctness.
+As you can see, the output regex string can get very messy when alternative branches are used (through the `.||+` operator) due to the excess of non-capturing groups used to ensure correctness.
+
+We can improve that a little by using the more efficient function 'inRanges' and giving up some readability:
+
+```haskell
+hexDigits' :: RegexToken
+hexDigits' = inRanges [('a', 'f'), ('A', 'F'), ('0', '9')]
+
+hexColor' :: String
+hexColor' = stringify $
+    startOfLine
+    <.+> optionally (char '#')
+    <.+> capture (
+        amountOf 6 hexDigits'
+        .||+ amountOf 3 hexDigits
+    )
+    <.+> endOfLine
+
+-- Output: ^#?((?:[a-fA-F0-9]{6}|(?:\d|(?:[a-f]|[A-F])){3}))$
+```

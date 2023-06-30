@@ -7,3 +7,4 @@ main = do
     putStrLn htmlTag'
     putStrLn imageTagSrc -- todo: add random testing for all of these
     putStrLn hexColor
+    putStrLn hexColor'

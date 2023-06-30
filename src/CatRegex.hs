@@ -12,6 +12,9 @@ module CatRegex
 , oneOf
 , notOneOf
 , inRange
+, notInRange
+, inRanges
+, notInRanges
 , amountOf
 , amountBetween
 , minimumOf

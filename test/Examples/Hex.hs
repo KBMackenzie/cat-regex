@@ -1,5 +1,6 @@
 module Examples.Hex
 ( hexColor
+, hexColor'
 ) where
 
 import CatRegex
@@ -20,3 +21,18 @@ hexColor = stringify $
     <.+> endOfLine
 
 -- Output: ^#?((?:(?:\d|(?:[a-f]|[A-F])){6}|(?:\d|(?:[a-f]|[A-F])){3}))$
+
+hexDigits' :: RegexToken
+hexDigits' = inRanges [('a', 'f'), ('A', 'F'), ('0', '9')]
+
+hexColor' :: String
+hexColor' = stringify $
+    startOfLine
+    <.+> optionally (char '#')
+    <.+> capture (
+        amountOf 6 hexDigits'
+        .||+ amountOf 3 hexDigits
+    )
+    <.+> endOfLine
+
+-- Output: ^#?((?:[a-fA-F0-9]{6}|(?:\d|(?:[a-f]|[A-F])){3}))$
