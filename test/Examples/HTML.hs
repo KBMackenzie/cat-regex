@@ -23,7 +23,7 @@ htmlTag' = stringify $
     <.+> capture (oneOrMore anyChar)
     <.+> char '>'
 
--- Output: <\s*img[^>]+src\s*["'](.*)["'][^>]*>
+-- Output: <\s*img[^>]+src\s*=\s*["'](.*)["'][^>]*>
 
 imageTagSrc :: String
 imageTagSrc = stringify $
@@ -33,13 +33,15 @@ imageTagSrc = stringify $
     <.+> oneOrMore (notOneOf ['>'])
     <.+> exactly "src"
     <.+> anyAmountOf whitespace
+    <.+> char '='
+    <.+> anyAmountOf whitespace
     <.+> oneOf [ '"', '\'' ]
     <.+> capture (anyAmountOf anyChar)
     <.+> oneOf [ '"', '\'' ]
     <.+> anyAmountOf (notOneOf ['>'])
     <.+> char '>'
 
--- Output: <\s*img[^>]+src\s*["'](.*)["'][^>]*>
+-- Output: <\s*img[^>]+src\s*=\s*["'](.*)["'][^>]*>
 
 imageTagSrc' :: String
 imageTagSrc' = stringify $ regexFromList
@@ -48,6 +50,8 @@ imageTagSrc' = stringify $ regexFromList
     , exactly "img"
     , oneOrMore (notOneOf ['>'])
     , exactly "src"
+    , anyAmountOf whitespace
+    , char '='
     , anyAmountOf whitespace
     , oneOf [ '"', '\'' ]
     , capture (anyAmountOf anyChar)
