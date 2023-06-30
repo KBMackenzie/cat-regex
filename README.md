@@ -71,7 +71,7 @@ htmlTag' = stringify $
 ```
 The capture groups will hold the information about the tag.
 
-As a side note: The strings passed to the `char` and `exactly` functions get **proper escape sequences added behind the scenes**, so don't worry about escaping characters like '.' and '/'. They always get escaped sequences added for them behind the scenes!
+As a side note: The strings passed to the `char` and `exactly` functions get **proper escape sequences added behind the scenes**, so don't worry about escaping characters like `.` and `/`. They always get escaped sequences added for them behind the scenes!
 
 That's why I've not had to escape the '/' in my example.
 
