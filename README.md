@@ -49,7 +49,7 @@ imageTagSrc' = stringify $ regexFromList
     , anyAmountOf (notOneOf ['>'])
     , char '>' ]
 
--- Output: <img[^>]+src\s*["'](.*)["'][^>]*>
+-- Output: <\s*img[^>]+src\s*["'](.*)["'][^>]*>
 ```
 
 2. Regex for extracting the contents of any HTML tag, as well as whether it's a closing tag:

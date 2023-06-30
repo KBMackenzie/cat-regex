@@ -39,11 +39,12 @@ imageTagSrc = stringify $
     <.+> anyAmountOf (notOneOf ['>'])
     <.+> char '>'
 
--- Output: <img[^>]+src\s*["'](.*)["'][^>]*>
+-- Output: <\s*img[^>]+src\s*["'](.*)["'][^>]*>
 
 imageTagSrc' :: String
 imageTagSrc' = stringify $ regexFromList
     [ char '<'
+    , anyAmountOf whitespace
     , exactly "img"
     , oneOrMore (notOneOf ['>'])
     , exactly "src"
