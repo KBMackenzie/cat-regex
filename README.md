@@ -39,6 +39,7 @@ All the `regexFromList` function really does is apply the `<.+>` operator to eac
 imageTagSrc' :: String
 imageTagSrc' = stringify $ regexFromList
     [ char '<'
+    , anyAmountOf whitespace
     , exactly "img"
     , oneOrMore (notOneOf ['>'])
     , exactly "src"
