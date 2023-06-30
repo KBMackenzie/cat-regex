@@ -6,8 +6,7 @@ module Examples.HTML
 
 import CatRegex
 
--- Example: <(?>/?)(?!p).+?>
-
+-- Output: <\/?.+>
 htmlTag :: String
 htmlTag = stringify $
     char '<'
@@ -15,15 +14,15 @@ htmlTag = stringify $
     <.+> oneOrMore anyChar
     <.+> char '>'
 
-htmlTag' :: String -- With captures.
+-- Output: <(\/?)(.+)>
+htmlTag' :: String
 htmlTag' = stringify $
     char '<'
-    <.+> capture (optionally (char '/'))
+    <.+> capture (optionally $ char '/')
     <.+> capture (oneOrMore anyChar)
     <.+> char '>'
 
--- /^<\s*img[^>]+src\s*=\s*(["'])(.*?)\1[^>]*>$/
-
+-- Output: <\s*img[^>]+src\s*["'](.*)["'][^>]*>
 imageTagSrc :: String
 imageTagSrc = stringify $
     char '<'

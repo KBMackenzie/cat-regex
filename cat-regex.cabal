@@ -58,7 +58,7 @@ test-suite cat-regex-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Examples.Foo
+      Examples.Hex
       Examples.HTML
       Examples.PhoneNumber
       Examples.UrlRegex

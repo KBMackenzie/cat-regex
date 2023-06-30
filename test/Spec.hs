@@ -1,4 +1,9 @@
 import Examples.HTML
+import Examples.Hex
 
 main :: IO ()
-main = putStrLn imageTagSrc -- todo: add random testing for all of these
+main = do
+    putStrLn htmlTag
+    putStrLn htmlTag'
+    putStrLn imageTagSrc -- todo: add random testing for all of these
+    putStrLn hexColor

@@ -4,7 +4,7 @@ module Examples.UrlRegex
 
 import CatRegex
 
--- Base for this regex:
+-- Base for this regex (from: https://projects.lukehaas.me/regexhub/):
 -- /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 
 urlRegex :: String

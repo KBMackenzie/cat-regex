@@ -28,3 +28,41 @@ imageTagSrc = stringify $
 
     -- Output: <\s*img[^>]+src\s*["'](.*)["'][^>]*>
 ```
+
+2. Regex for extracting the contents of any HTML tag, as well as whether it's a closing tag:
+
+```haskell
+htmlTag' :: String
+htmlTag' = stringify $
+    char '<'
+    <.+> capture (optionally $ char '/')
+    <.+> capture (oneOrMore anyChar)
+    <.+> char '>'
+
+    -- Output: <(\/?)(.+)>
+```
+
+3. Regex for validating a hex color code and extracting its value:
+
+```haskell
+-- Valid hexadecimal digits.
+hexDigits :: RegexToken
+hexDigits = digit .||+ inRange 'a' 'f' .||+ inRange 'A' 'F'
+
+-- Regex string using the helper above.
+hexColor :: String
+hexColor = stringify $
+    startOfLine
+    <.+> optionally (char '#')
+    <.+> capture (
+        amountOf 6 hexDigits
+        .||+ amountOf 3 hexDigits
+    )
+    <.+> endOfLine
+
+-- Output: ^#?((?:(?:\d|(?:[a-f]|[A-F])){6}|(?:\d|(?:[a-f]|[A-F])){3}))$
+```
+
+Defining helper functions to avoid repetition is very helpful, as shown above.
+
+The output regex string can get very messy when alternative branches (through the `.||+` operator) are used due to the excess of non-capturing groups used to ensure correctness.
