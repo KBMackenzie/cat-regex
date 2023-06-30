@@ -26,13 +26,15 @@ module CatRegex.Internal.Blocks
 , notWordChar
 , startOfLine
 , endOfLine
+, char'
+, exactly'
 ) where
 
 import CatRegex.Internal.AST
 import qualified Data.Text as Text
 
 exactly :: String -> RegexToken
-exactly = Exactly . Text.pack
+exactly = Exactly
 
 char :: Char -> RegexToken
 char = Single
@@ -118,3 +120,12 @@ startOfLine = LineStart
 
 endOfLine :: RegexToken
 endOfLine = LineEnd
+
+
+-- Unescaped string variants:
+
+char' :: Char -> RegexToken
+char' = SingleUnescaped
+
+exactly' :: String -> RegexToken
+exactly' = Unescaped

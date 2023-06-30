@@ -15,7 +15,7 @@ import qualified Data.Text as Text
 type IsFlipped = Bool
 
 data RegexToken =
-      Exactly Text.Text
+      Exactly String
     | Single Char
     | CharRange IsFlipped Char Char
     | CharGroup IsFlipped [Char]
@@ -29,6 +29,8 @@ data RegexToken =
     | Count Int RegexThread
     | CountRange (Maybe Int) (Maybe Int) RegexThread
     | AnyChar
+    | Unescaped String
+    | SingleUnescaped Char
     | LineStart | LineEnd
     deriving (Eq, Show)
 

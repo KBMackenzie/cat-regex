@@ -33,8 +33,8 @@ escapeChar c = if Set.member c shouldEscape
     then Text.pack [ '\\', c ]
     else Text.singleton c
 
-escapeString :: Text.Text -> Text.Text
-escapeString = Text.concat . map escapeChar . Text.unpack
+escapeString :: String -> Text.Text
+escapeString = Text.concat . map escapeChar
 
 maybeShow :: (Show a) => Maybe a -> Text.Text
 {-# SPECIALIZE maybeShow :: Maybe Int -> Text.Text #-}
@@ -91,5 +91,7 @@ stringifyToken (CountRange a b xs) = unrollForOp xs `Text.append`
     (range . Text.concat) [ maybeShow a, ",", maybeShow b ]
 stringifyToken (Alternative a b) = (nonCaptureGroup . Text.concat) [ unrollThread a, "|", unrollThread b ]
 stringifyToken AnyChar = "."
+stringifyToken (Unescaped str) = Text.pack str
+stringifyToken (SingleUnescaped c) = Text.singleton c
 stringifyToken LineStart = "^"
 stringifyToken LineEnd = "$"

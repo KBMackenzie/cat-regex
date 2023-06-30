@@ -30,6 +30,8 @@ module CatRegex
 , notWordChar
 , startOfLine
 , endOfLine
+, char'
+, exactly'
 , regexFromList
 ) where
 
