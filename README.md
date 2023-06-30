@@ -79,9 +79,11 @@ hexColor' = stringify $
     <.+> optionally (char '#')
     <.+> capture (
         amountOf 6 hexDigits'
-        .||+ amountOf 3 hexDigits
+        .||+ amountOf 3 hexDigits'
     )
     <.+> endOfLine
 
--- Output: ^#?((?:[a-fA-F0-9]{6}|(?:\d|(?:[a-f]|[A-F])){3}))$
+-- Output: ^#?((?:[a-fA-F0-9]{6}|[a-fA-F0-9]{3}))$
 ```
+
+A lot cleaner!
