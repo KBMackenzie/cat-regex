@@ -19,6 +19,7 @@ data RegexToken =
     | Single Char
     | CharRange IsFlipped Char Char
     | CharGroup IsFlipped [Char]
+    | CharRanges IsFlipped [(Char, Char)]
     | GenericChar GenChar IsFlipped 
     | Operation Operator RegexThread
     | Alternative RegexThread RegexThread

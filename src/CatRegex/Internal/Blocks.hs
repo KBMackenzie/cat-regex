@@ -9,6 +9,8 @@ module CatRegex.Internal.Blocks
 , notOneOf
 , inRange
 , notInRange
+, inRanges
+, notInRanges
 , amountOf
 , amountBetween
 , minimumOf
@@ -58,6 +60,12 @@ inRange = CharRange False
 
 notInRange :: Char -> Char -> RegexToken
 notInRange = CharRange True
+
+inRanges :: [(Char, Char)] -> RegexToken
+inRanges = CharRanges False
+
+notInRanges :: [(Char, Char)] -> RegexToken
+notInRanges = CharRanges True
 
 amountOf :: (RegexBuilder a) => Int -> a -> RegexToken
 amountOf a = Count a . single

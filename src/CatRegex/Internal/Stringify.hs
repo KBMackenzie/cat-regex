@@ -76,8 +76,12 @@ stringifyToken (CharGroup flipped xs) = characterClass $ if flipped
     then "^" `Text.append` Text.pack xs
     else Text.pack xs
 stringifyToken (CharRange flipped start end) = characterClass $ if flipped
-    then "^" `Text.append` Text.pack [start, '-', end]
+    then "^" `Text.append` Text.concat [escapeChar start, "-", escapeChar end]
     else Text.pack [start, '-', end]
+stringifyToken (CharRanges flipped xs) = let f (a, b) = [ escapeChar a, ",", escapeChar b ]
+    in characterClass $ if flipped
+        then "^" `Text.append` (Text.concat . concatMap f) xs
+        else (Text.concat . concatMap f) xs
 stringifyToken (GenericChar gen flipped) = genChar gen flipped
 stringifyToken (CaptureGroup xs) = captureGroup (unrollThread xs)
 stringifyToken (AtomicGroup xs) = atomicGroup (unrollThread xs)
