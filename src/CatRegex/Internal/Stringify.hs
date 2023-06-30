@@ -26,7 +26,7 @@ genChar gen flipped = (if flipped then Text.toUpper else id) $ case gen of
 
 shouldEscape :: Set.Set Char
 shouldEscape = Set.fromList
-    [ '*', '+', '?', '.', '(', ')', '\\', '/', '[', ']', '{', '}', ':', '^', '$' ]
+    [ '*', '+', '?', '.', '(', ')', '\\', '/', '[', ']', '{', '}', ':', '^', '$', '|' ]
 
 escapeChar :: Char -> Text.Text
 escapeChar c = if Set.member c shouldEscape
