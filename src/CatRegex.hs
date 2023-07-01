@@ -22,6 +22,7 @@ module CatRegex
 , (.||+)
 , anyChar
 , atomic
+, groupUp
 , digit
 , notDigit
 , whitespace
