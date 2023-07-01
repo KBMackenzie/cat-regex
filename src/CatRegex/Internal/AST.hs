@@ -24,6 +24,7 @@ data RegexToken =
     | Operation Operator RegexThread
     | Alternative RegexThread RegexThread
     | CaptureGroup RegexThread
+    | NamedCapture String RegexThread
     | AtomicGroup RegexThread
     | NonCaptureGroup RegexThread
     | Count Int RegexThread

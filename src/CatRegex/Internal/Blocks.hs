@@ -19,6 +19,7 @@ module CatRegex.Internal.Blocks
 , anyChar
 , atomic
 , groupUp
+, namedCapture
 , digit
 , notDigit
 , whitespace
@@ -95,6 +96,9 @@ atomic = AtomicGroup . single
 
 groupUp :: (RegexBuilder a) => a -> RegexToken
 groupUp = NonCaptureGroup . single
+
+namedCapture :: (RegexBuilder a) => String -> a -> RegexToken
+namedCapture name = NamedCapture name . single
 
 -- Generic character classes:
 

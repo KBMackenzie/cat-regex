@@ -62,6 +62,10 @@ atomicGroup = between "(?>" ")"
 nonCaptureGroup :: Text.Text -> Text.Text
 nonCaptureGroup = between "(?:" ")"
 
+namedCaptureGroup :: String -> Text.Text -> Text.Text
+namedCaptureGroup name = between start ")"
+    where start = Text.concat [ "(?<", Text.pack name, ">" ]
+
 range :: Text.Text -> Text.Text
 range = between "{" "}"
 
@@ -86,6 +90,7 @@ stringifyToken (GenericChar gen flipped) = genChar gen flipped
 stringifyToken (CaptureGroup xs) = captureGroup (unrollThread xs)
 stringifyToken (AtomicGroup xs) = atomicGroup (unrollThread xs)
 stringifyToken (NonCaptureGroup xs) = nonCaptureGroup (unrollThread xs)
+stringifyToken (NamedCapture name xs) = namedCaptureGroup name (unrollThread xs)
 stringifyToken (Count n xs) = unrollForOp xs `Text.append` (range . Text.pack . show) n
 stringifyToken (CountRange a b xs) = unrollForOp xs `Text.append`
     (range . Text.concat) [ maybeShow a, ",", maybeShow b ]

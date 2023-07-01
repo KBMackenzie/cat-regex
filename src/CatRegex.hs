@@ -23,6 +23,7 @@ module CatRegex
 , anyChar
 , atomic
 , groupUp
+, namedCapture
 , digit
 , notDigit
 , whitespace
