@@ -52,11 +52,12 @@ htmlTag' = stringify $
 ```
 The capture groups will hold the information about the tag.
 
-As a side note: The strings passed to the `char` and `exactly` functions get **proper escape sequences added behind the scenes**, so don't worry about escaping characters like `.` and `/`. They always get escaped sequences added for them behind the scenes! That's why I've not had to escape the '/' in my example.
+As a side note: The strings passed to the `char` and `exactly` functions get **proper escape sequences added behind the scenes**, so don't worry about escaping characters like `.` and `/`. That's why I've not had to escape the '/' in my example.
 
 If you wish to ensure your strings never get any escape sequences added behind the scenes, use the `char'` and `exactly'` function variations instead. Beware you can break the resulting Regex string if you do this, however. The duty of adding the necessary escape sequences will be yours.
 
-3. Regex for validating a hex color code and extracting its value:
+
+3. Regex for validating a hex color code (like \#ffffff) and extracting its value:
 
 ```haskell
 -- Valid hexadecimal digits.
@@ -99,3 +100,8 @@ hexColor' = stringify $
 ```
 
 A lot cleaner! Still has an unnecessary non-capture group, but that's a very minimal issue.
+
+
+## To Do:
+1. Add documentation for every function.
+2. Add better examples to the README.
