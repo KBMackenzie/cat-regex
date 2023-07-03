@@ -7,54 +7,36 @@ module Examples.HTML
 
 import CatRegex
 
--- Output: <\/?.+>
 htmlTag :: String
 htmlTag = stringify $
     char '<'
     <.+> optionally (char '/')
     <.+> oneOrMore anyChar
     <.+> char '>'
+    -- Output: <\/?.+>
 
--- Output: <(\/?)(.+)>
 htmlTag' :: String
 htmlTag' = stringify $
     char '<'
     <.+> capture (optionally $ char '/')
     <.+> capture (oneOrMore anyChar)
     <.+> char '>'
-
--- Output: <\s*img[^>]+src\s*=\s*["'](.*)["'][^>]*>
+    -- Output: <(\/?)(.+)>
 
 imageTagSrc :: String
 imageTagSrc = stringify $
     char '<'
     <.+> anyAmountOf whitespace
     <.+> exactly "img"
-    <.+> oneOrMore (notOneOf ['>'])
-    <.+> exactly "src"
-    <.+> anyAmountOf whitespace
-    <.+> char '='
-    <.+> anyAmountOf whitespace
-    <.+> oneOf [ '"', '\'' ]
     <.+> capture (anyAmountOf anyChar)
-    <.+> oneOf [ '"', '\'' ]
-    <.+> anyAmountOf (notOneOf ['>'])
     <.+> char '>'
-
--- Output: <\s*img[^>]+src\s*=\s*["'](.*)["'][^>]*>
+    -- Output: <\s*img(.*)>
 
 imageTagSrc' :: String
 imageTagSrc' = stringify $ regexFromList
     [ char '<'
     , anyAmountOf whitespace
     , exactly "img"
-    , oneOrMore (notOneOf ['>'])
-    , exactly "src"
-    , anyAmountOf whitespace
-    , char '='
-    , anyAmountOf whitespace
-    , oneOf [ '"', '\'' ]
     , capture (anyAmountOf anyChar)
-    , oneOf [ '"', '\'' ]
-    , anyAmountOf (notOneOf ['>'])
     , char '>' ]
+    -- Output: <\s*img(.*)>
