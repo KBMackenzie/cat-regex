@@ -7,9 +7,7 @@ This library builds an abstract syntax tree behind the scenes and then efficient
 
 The `stringify` function is polymorphic in its return type, and you can cast it to any of Haskell's string types. It uses the IsString typeclass, the same typeclass used by the OverloadedStrings language extension.
 
-The documentation for this library is still in progress.
-
-Still, aa few examples:
+The documentation for this library is **still in progress**. Still, I'll give a few examples:
 
 1. Regex for extracting the contents from an HTML \<img\> tag:
 
